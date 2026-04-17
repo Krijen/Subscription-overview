@@ -150,42 +150,91 @@
   background: rgba(255, 92, 92, 0.1);
 }
 
+.navText {
+  /* targeted for mobile hiding */
+}
+
+.mobileLogout {
+  display: none;
+}
+
 .main {
   flex: 1;
   margin-left: 240px;
   padding: 48px;
   max-width: 1200px;
+  min-width: 0;
 }
 
 @media (max-width: 768px) {
+  .shell {
+    flex-direction: column;
+  }
+
   .sidebar {
     width: 100%;
     min-height: auto;
     position: static;
     flex-direction: row;
-    padding: 16px 20px;
+    padding: 12px 16px;
     align-items: center;
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .shell {
-    flex-direction: column;
+    gap: 4px;
   }
 
   .logo {
     margin-bottom: 0;
-    margin-right: 24px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .logoText {
+    display: none;
   }
 
   .nav {
     flex-direction: row;
-    gap: 4px;
+    gap: 2px;
+    flex: 1;
+  }
+
+  .navLink {
+    padding: 8px 10px;
+    gap: 0;
+  }
+
+  .navText {
+    display: none;
+  }
+
+  .navIcon {
+    font-size: 18px;
+    width: auto;
+  }
+
+  .mobileLogout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all var(--transition);
+    flex-shrink: 0;
+  }
+
+  .mobileLogout:hover {
+    color: var(--danger);
+    background: rgba(255, 92, 92, 0.1);
   }
 
   .main {
     margin-left: 0;
-    padding: 24px 20px;
+    padding: 20px 16px;
+    width: 100%;
   }
 
   .sidebarFooter {

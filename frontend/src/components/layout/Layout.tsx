@@ -35,10 +35,11 @@ export default function Layout() {
               }
             >
               <span className={styles.navIcon}>{item.icon}</span>
-              <span>{item.label}</span>
+              <span className={styles.navText}>{item.label}</span>
             </NavLink>
           ))}
         </nav>
+        <button className={styles.mobileLogout} onClick={handleLogout} title="Sign out">⇥</button>
         <div className={styles.sidebarFooter}>
           {user && (
             <div className={styles.userSection}>
