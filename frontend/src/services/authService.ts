@@ -16,6 +16,7 @@ export interface AuthResponse {
   token: string
   email: string
   displayName: string
+  avatarUrl?: string
 }
 
 export const authService = {
