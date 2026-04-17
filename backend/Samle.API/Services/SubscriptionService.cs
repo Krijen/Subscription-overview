@@ -35,9 +35,9 @@ public class SubscriptionService : ISubscriptionService
             Price = dto.Price,
             Currency = dto.Currency,
             BillingCycle = dto.BillingCycle,
-            StartDate = dto.StartDate,
-            EndDate = dto.EndDate,
-            NextPaymentDate = dto.NextPaymentDate,
+            StartDate = Utc(dto.StartDate),
+            EndDate = dto.EndDate.HasValue ? Utc(dto.EndDate.Value) : null,
+            NextPaymentDate = Utc(dto.NextPaymentDate),
             LogoUrl = dto.LogoUrl,
             Category = dto.Category
         };
@@ -55,8 +55,8 @@ public class SubscriptionService : ISubscriptionService
             Price = dto.Price,
             Currency = dto.Currency,
             BillingCycle = dto.BillingCycle,
-            EndDate = dto.EndDate,
-            NextPaymentDate = dto.NextPaymentDate,
+            EndDate = dto.EndDate.HasValue ? Utc(dto.EndDate.Value) : null,
+            NextPaymentDate = Utc(dto.NextPaymentDate),
             LogoUrl = dto.LogoUrl,
             Category = dto.Category,
             IsActive = dto.IsActive
@@ -70,6 +70,8 @@ public class SubscriptionService : ISubscriptionService
     {
         return await _repository.DeleteAsync(id, userId);
     }
+
+    private static DateTime Utc(DateTime dt) => DateTime.SpecifyKind(dt, DateTimeKind.Utc);
 
     private static SubscriptionDto MapToDto(Subscription s)
     {
