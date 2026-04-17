@@ -1,0 +1,20 @@
+# Backend
+backend/Samle.API/DataProtection-Keys/
+backend/Samle.API/bin/
+backend/Samle.API/obj/
+backend/Samle.Tests/bin/
+backend/Samle.Tests/obj/
+*.user
+.vs/
+appsettings.Development.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# General
+.DS_Store
+Thumbs.db
+*.log
