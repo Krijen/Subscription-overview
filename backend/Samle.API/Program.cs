@@ -128,11 +128,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseForwardedHeaders(new Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersOptions
+var forwardedOptions = new Microsoft.AspNetCore.HttpOverrides.ForwardedHeadersOptions
 {
     ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor
                      | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto
-});
+};
+forwardedOptions.KnownNetworks.Clear();
+forwardedOptions.KnownProxies.Clear();
+app.UseForwardedHeaders(forwardedOptions);
 
 if (app.Environment.IsDevelopment())
 {
