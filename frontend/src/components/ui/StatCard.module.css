@@ -24,11 +24,12 @@
 }
 
 .value {
-  font-family: var(--font-display);
+  font-family: var(--font-money);
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
+  letter-spacing: -0.5px;
 }
 
 .accent .value {

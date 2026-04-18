@@ -75,10 +75,11 @@
 }
 
 .amount {
-  font-family: var(--font-display);
+  font-family: var(--font-money);
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.5px;
 }
 
 .currency {
