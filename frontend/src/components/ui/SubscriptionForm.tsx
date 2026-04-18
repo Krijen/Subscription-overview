@@ -98,6 +98,9 @@ export default function SubscriptionForm({ initial, onSubmit, onCancel, submitLa
   const [priceDisplay, setPriceDisplay] = useState(
     initial?.price != null && initial.price !== 0 ? String(initial.price) : ''
   )
+  const [dayDisplay, setDayDisplay] = useState(
+    String(initial?.paymentDayOfMonth ?? new Date().getDate())
+  )
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -271,8 +274,22 @@ export default function SubscriptionForm({ initial, onSubmit, onCancel, submitLa
             min="1"
             max="31"
             required
-            value={form.paymentDayOfMonth}
-            onChange={e => set('paymentDayOfMonth', Math.min(31, Math.max(1, parseInt(e.target.value) || 1)))}
+            value={dayDisplay}
+            onChange={e => {
+              setDayDisplay(e.target.value)
+              const n = parseInt(e.target.value)
+              if (!isNaN(n)) set('paymentDayOfMonth', Math.min(31, Math.max(1, n)))
+            }}
+            onBlur={() => {
+              const n = parseInt(dayDisplay)
+              if (isNaN(n) || dayDisplay === '') {
+                setDayDisplay(String(form.paymentDayOfMonth))
+              } else {
+                const clamped = Math.min(31, Math.max(1, n))
+                setDayDisplay(String(clamped))
+                set('paymentDayOfMonth', clamped)
+              }
+            }}
           />
           <span className={styles.hint}>
             Next payment: {nextDateForDay(form.paymentDayOfMonth)}
