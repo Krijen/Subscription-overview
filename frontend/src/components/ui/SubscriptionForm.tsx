@@ -50,20 +50,22 @@ const PLATFORMS = [
   { name: 'The Guardian',          category: 'News',          domain: 'theguardian.com' },
 ]
 
+function localDateStr(date: Date): string {
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
 // Given a day-of-month (1–31), return the next date that day falls on
 function nextDateForDay(day: number): string {
   const today = new Date()
   const year = today.getFullYear()
   const month = today.getMonth()
 
-  // Try this month first
   const candidate = new Date(year, month, day)
-  if (candidate >= today) {
-    return candidate.toISOString().split('T')[0]
-  }
-  // Otherwise next month
-  const next = new Date(year, month + 1, day)
-  return next.toISOString().split('T')[0]
+  if (candidate >= today) return localDateStr(candidate)
+  return localDateStr(new Date(year, month + 1, day))
 }
 
 export interface SubscriptionFormValues extends Omit<CreateSubscriptionDto, 'nextPaymentDate'> {
